@@ -1,0 +1,44 @@
+
+<html> 
+<head>
+<title>JQuery UI Example</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function()  
+{
+   // Removed the alert as it served no purpose for this app  
+});
+
+function showHint(str) {
+ if (str.length >= 1) {
+ $.get(
+    "/student/Search?q=" + str,
+            "",
+    function(data) { 
+     document.getElementById("txtHint").innerHTML=data; 
+    },
+    "html"
+ );
+ } else 
+ document.getElementById("txtHint").innerHTML="No Suggestions";
+}
+</script> 
+
+</head> 
+<body> 
+<h2>Search for Names</h2>
+<p>Type in the box to search for names of lecturers in the School of Electronic Engineering:</p>
+
+<form id="searchNames" method="GET" action="Path-to-the-target-of-the-form-which-we-are-not-currently-concerned-with">
+<b>Search : </b>
+<input type="text" autocomplete="off" onkeyup="showHint(this.value)" name="searchString" size="20" maxlength="30" />
+<br/>
+<input type="submit" value="Search" />
+</form>
+
+<br/>
+<div class="box" id="autodiv1">
+<span id="txtHint">No Suggestions</span>
+</div>
+</body> 
+</html>
