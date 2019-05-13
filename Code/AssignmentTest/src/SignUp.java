@@ -13,8 +13,8 @@ import oracle.jdbc.driver.OracleDriver;
 /**
  * Servlet implementation class LoginCheck
  */
-@WebServlet("/LoginCheck")
-public class LoginCheck extends HttpServlet {
+@WebServlet("/SignUp")
+public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -26,7 +26,7 @@ public class LoginCheck extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginCheck() {
+	public SignUp() {
 		super();
 	}
 
@@ -49,13 +49,17 @@ public class LoginCheck extends HttpServlet {
 		String JDBCUrl = "jdbc:oracle:thin:@ee417.c7clh2c6565n.eu-west-1.rds.amazonaws.com:1521:EE417";
 		String username = "ee_user";
 		String password = "ee_pass";
-		if (request.getParameter("login") != null) {
+		int id =0;
+		if (request.getParameter("createaccount") != null) {
+			String firstname = request.getParameter("firstname");
+			String surname = request.getParameter("surname");
+			String email = request.getParameter("email");
 			String uname = request.getParameter("username");
 			String pword = request.getParameter("password");
+			String country = request.getParameter("countrySelect");
 			System.out.println(username);
 			System.out.println(password);
-			String query = "SELECT PASSWORD FROM EE_USER.MLECE_USERS WHERE USERNAME='" + uname + "'";
-			System.out.println(query);
+			String getID = "SELECT MAX(USERID) FROM MLECE_USERS";
 			try {
 				System.out.println("\nConnecting to the SSD Database......");
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -64,23 +68,37 @@ public class LoginCheck extends HttpServlet {
 				System.out.println(e);
 			}
 			try {
-				System.out.println("1");
 				stmt = con.createStatement();
-				System.out.println("2");
-				rs = stmt.executeQuery(query);
-				System.out.println("3");
+				System.out.println(getID);
+				rs = stmt.executeQuery(getID);
 				while (rs.next()) {
-					System.out.println(rs.getString("PASSWORD"));
-					if (pword.equals(rs.getString("PASSWORD"))) {
-						response.sendRedirect("home.html");
-					} else {
-						response.sendRedirect("login.jsp");
-					}
+					id = rs.getInt("MAX(USERID)");
+					System.out.println(id);
 				}
+				rs.close();
+				rs = null;
+				stmt.close();
+				stmt = null;
 			} catch (Exception e) {
+				System.out.println(e);
 				System.out.println(
 						"<BR>An error has occurred during the Statement/ResultSet phase.  Please check the syntax and study the Exception details!");
-			} finally {
+			}
+			try {
+				stmt = con.createStatement();
+				id+=1;
+				String createUser = "INSERT INTO EE_USER.MLECE_USERS ( "
+						+ "USERID, SURNAME, FIRSTNAME, EMAIL, USERNAME, PASSWORD, COUNTRY )"
+						+ "VALUES ("
+						+ id + ", '" + surname + "', '" + firstname + "', '"
+						+ email + "', '" + uname + "', '" + pword + "', '"
+						+ country +"' )";
+				System.out.println(createUser);
+				stmt.executeQuery(createUser);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			finally {
 				try {
 					if (rs != null)
 						rs.close();
@@ -92,8 +110,6 @@ public class LoginCheck extends HttpServlet {
 					System.out.println("<BR>An error occurred while closing down connection/statement");
 				}
 			}
-		} else if (request.getParameter("signup") != null) {
-			response.sendRedirect("signup.jsp");
 		} else {
 		}
 	}

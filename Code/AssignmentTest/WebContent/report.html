@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Report</title>
+<link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header>
+		<nav class="header-items">
+			<ul>
+				<li><a href="home.html">Home</a></li>
+				<li><a href="categories.html">Categories</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="report.html">Report</a></li>
+				<li class="header-item-signup">
+					<table>
+						<tr>
+							<td>
+								<form id="searchbox" action="">
+									<input id="searchInput" type="text" value="Search">
+								</form>
+							</td>
+							<td><a href="login.jsp" style="color: #ecf0f1">Login</a></td>
+							<td><a href="signup.jsp" style="color: #ecf0f1">Sign-Up</a></td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="main">
+		<div class="container">
+			<div class="content-box">
+				<div class="content-header">
+					<ul>
+						<li>Report</li>
+					</ul>
+				</div>
+				<div class="content">
+					<h1>Assignment Report</h1>
+					<p>This is a system which allows users to buy and sell items
+					<h2>Home Page</h2>
+					<p>The Home page contains a navigation bar with links to the
+						main pages including Categories, About, and Report. The main
+						contents of the home page are placeholder text ("Lorem Ipsum"),
+						with a short description of the site.
+					<h2>Categories Page</h2>
+					<p>The Categories page list the category of items within the
+						Items table. These act as filters for displaying items
+					<h2>About Page</h2>
+					<p>The About page has a short "About Us" style description,
+						with placeholder text.
+					<h2>Report Page</h2>
+					<p>The current page is the Report page, reporting on how the
+						assignment was tackled.
+					<h2>Database Tables</h2>
+					<p>Three tables were created for the storage of the required
+						data. The following SQL statements were used for the creation and
+						instantiation of these tables:
+					<h3>Users</h3>
+					<p>CREATE TABLE MLECE_USERS (UserID int, Surname varchar(255),
+						Firstname varchar(255), Email varchar(255), Username varchar(255),
+						Password varchar(255), Country varchar(255))
+					<p>INSERT INTO MLECE_USERS ( USERID, SURNAME, FIRSTNAME, EMAIL,
+						USERNAME, PASSWORD, COUNTRY ) VALUES ( 2174, 'Smith', 'Peter',
+						'smithp@gmail.com', 'abc123', 'Ireland' )
+					<p>INSERT INTO MLECE_USERS ( USERID, SURNAME, FIRSTNAME, EMAIL,
+						USERNAME, PASSWORD, COUNTRY ) VALUES ( 2175, 'Murphy', 'Joe',
+						'joe.murhphy@microsoft.com', 'murhpyj', 'pass000', 'Ireland' )
+					<p>INSERT INTO MLECE_USERS ( USERID, SURNAME, FIRSTNAME, EMAIL,
+						USERNAME, PASSWORD, COUNTRY ) VALUES ( 2176, 'Jones', 'Mary',
+						'mary.jones@hotmail.com', 'jonesm', 'password2', 'United States' )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+					<p>INSERT INTO MLECE_USERS ( USERID, SURNAME, FIRSTNAME, EMAIL,
+						USERNAME, PASSWORD, COUNTRY ) VALUES ( 2177, 'Ryan', 'Ann',
+						'ann.ryan@mail.dcu.ie', 'ryana', 'dogsname', 'England' )
+					<h3>Sales</h3>
+					<p>CREATE TABLE MLECE_SALES ( SaleID int, ItemID int,
+						StartingPrice float, CurrentBid float, PurchaseID int )
+					<p>INSERT INTO MLECE_SALES (SALEID, ITEMID, STARTINGPRICE,
+						CURRENTBID, PURCHASEID ) VALUES ( 1426, 1300, 60.00, 75.00, 2174 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+					<p>INSERT INTO MLECE_SALES (SALEID, ITEMID, STARTINGPRICE,
+						CURRENTBID, PURCHASEID ) VALUES ( 1427, 1301, 149.00, 200.00, 2174
+						)
+					<p>INSERT INTO MLECE_SALES (SALEID, ITEMID, STARTINGPRICE,
+						CURRENTBID, PURCHASEID ) VALUES ( 1428, 1302, 134.99, 150.50, 2176
+						)
+					<p>INSERT INTO MLECE_SALES (SALEID, ITEMID, STARTINGPRICE,
+						CURRENTBID, PURCHASEID ) VALUES ( 1429, 1303, 29.00, 40.00, 2177 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+					<h3>Items</h3>
+					<p>CREATE TABLE MLECE_ITEMS ( SellerID int, ItemName
+						varchar(255), ItemID int, ItemDescription varchar(255), Category
+						varchar(255))
+					<p>INSERT INTO MLECE_ITEMS (SELLERID, ITEMNAME, ITEMID,
+						ITEMDESCRIPTION, CATEGORY) VALUES ( 2175, 'Timberland Men
+						Adventure 2.0 Cupsole Chukka Boots', 1300, 'EVA footbeds / 34
+						percent recycled rubber siped outsoles are designed for slip
+						resistance ', 'Clothing')
+					<p>INSERT INTO MLECE_ITEMS (SELLERID, ITEMNAME, ITEMID,
+						ITEMDESCRIPTION, CATEGORY ) VALUES ( 2176, 'Ring Spotlight Cam
+						Wired | HD Security Camera with LED Spotlight, Alarm, Two-Way
+						Talk, UK Plug', 1301, 'Lets you see, hear and speak to visitors
+						from your phone, tablet and PC.', 'Security')
+					<p>INSERT INTO MLECE_ITEMS (SELLERID, ITEMNAME, ITEMID,
+						ITEMDESCRIPTION, CATEGORY ) VALUES ( 2175, 'Garmin Vivoactive 3
+						GPS Smartwatch with Built-In Sports Apps and Wrist Heart Rate -
+						Black ', 1302, 'Sporty smartwatch with built-in GPS, sports apps
+						and wrist-based heart rate. Display resolution is 240 x 240
+						pixels. The watch fits wrist with a circumference of 12.7-20.4
+						cm', 'Health and Fitness')
+					<p>INSERT INTO MLECE_ITEMS (SELLERID, ITEMNAME, ITEMID,
+						ITEMDESCRIPTION, CATEGORY ) VALUES ( 2176, 'All-new Echo Dot (3rd
+						Gen) - Smart speaker with Alexa - Charcoal Fabric', 1303, 'Ask
+						Alexa to play music, answer questions, read the news, check the
+						weather, set alarms, control compatible smart home devices, and
+						more.', 'Home Automation')
+					<h2>Database Commands</h2>
+					<p>The database commands were implemented within the
+						application for the following sections:
+					<h3>Login Check</h3>
+					<p>"SELECT PASSWORD FROM EE_USER.MLECE_USERS WHERE USERNAME='"
+						+ uname + "'"
+					<p>This command checks if the username and password entered in
+						the login.jsp form matches the username and password stored in the
+						database.
+					<p>If these values match, the user is returned to the Home
+						page, and if not, returned to the login page.
+					<h3>Sign Up</h3>
+					<p>"SELECT MAX(USERID) FROM MLECE_USERS"
+					<p>This command checks for the maximum value contained in the
+						user ID column, this value will be incremented by 1 and used for
+						the user ID of the newly created user.
+					<p>"INSERT INTO EE_USER.MLECE_USERS ( " + "USERID, SURNAME,
+						FIRSTNAME, EMAIL, USERNAME, PASSWORD, COUNTRY )" + "VALUES (" + id
+						+ ", '" + surname + "', '" + firstname + "', '" + email + "', '" +
+						uname + "', '" + pword + "', '" + country +"')"
+					<p>This command creates a new user with the new user ID value,
+						and the input user information.
+					<h3>Read in Items</h3>
+					<p>SELECT * FROM MLECE_ITEMS
+					<p>This command reads in the items from the items database
+						table.
+					<h3>Bid on Items</h3>
+					<p>"UPDATE MLECE_SALES SET CURRENTBID=" + bid + " WHERE
+						SALEID=" + saleid
+					<p>This command updates the Sales table with the users current
+						bid
+					<h3>Buy Items</h3>
+					<p>"DELETE FROM MLECE_ITEMS WHERE ITEMID=" itemid
+					<p>These commands delete the purchased item from the database
+						table.
+					<p>The SALES table entry is kept for record of sales.
+					<h3>Add Sale Items</h3>
+					<p>"INSERT INTO MLECE_ITEMS (" + sellerid + ", '" + itemname +
+						"', " + itemid + ", '" + itemdescription + "', '" + category + "'
+						")
+					<p>"INSERT INTO MLECE_SALES (" + saleid + ", " + itemid + ", "
+						+ startingprice + ", NULL + , + NULL )";
+					<p>These commands place the new item into the database with the
+						correct userid and starting price
+					<h2>Login Details</h2>
+					<p>Login may be completed using any of the aforementioned
+						username and password combinations, or tested by creating an
+						account using the Sign-Up feature. A successful login is indicated
+						by a return to the home page, with an unsuccessful login indicated
+						by the reloading of the login page
+					<h2>Problems Faced</h2>
+					<p>Unfortunately I could not get items from the Database Tables
+						listed within the categories page, as intended, and as such could
+						not fully test the implementation
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

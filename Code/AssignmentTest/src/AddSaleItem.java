@@ -13,8 +13,8 @@ import oracle.jdbc.driver.OracleDriver;
 /**
  * Servlet implementation class LoginCheck
  */
-@WebServlet("/LoginCheck")
-public class LoginCheck extends HttpServlet {
+@WebServlet("/AddSaleItem")
+public class AddSaleItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -26,7 +26,7 @@ public class LoginCheck extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginCheck() {
+	public AddSaleItem() {
 		super();
 	}
 
@@ -49,13 +49,22 @@ public class LoginCheck extends HttpServlet {
 		String JDBCUrl = "jdbc:oracle:thin:@ee417.c7clh2c6565n.eu-west-1.rds.amazonaws.com:1521:EE417";
 		String username = "ee_user";
 		String password = "ee_pass";
-		if (request.getParameter("login") != null) {
-			String uname = request.getParameter("username");
-			String pword = request.getParameter("password");
+		int id = 0;
+		if (request.getParameter("createaccount") != null) {
+			String sellerid = request.getParameter("sellerID");
+			String itemname = request.getParameter("itemName");
+			String itemid = request.getParameter("itemID");
+			String itemdescription = request.getParameter("itemDesc");
+			String category = request.getParameter("category");
+			String saleid = request.getParameter("saleid");
+			String startingprice = request.getParameter("price");
+
 			System.out.println(username);
 			System.out.println(password);
-			String query = "SELECT PASSWORD FROM EE_USER.MLECE_USERS WHERE USERNAME='" + uname + "'";
-			System.out.println(query);
+			String addItem = "INSERT INTO MLECE_ITEMS (" + sellerid + ", '" + itemname + "', " + itemid + ", '"
+					+ itemdescription + "', '" + category + "' )";
+			String addSale = "INSERT INTO MLECE_SALES (" + saleid + ", " + itemid + ", " + startingprice
+					+ ", NULL + ,  + NULL  )";
 			try {
 				System.out.println("\nConnecting to the SSD Database......");
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -64,20 +73,20 @@ public class LoginCheck extends HttpServlet {
 				System.out.println(e);
 			}
 			try {
-				System.out.println("1");
 				stmt = con.createStatement();
-				System.out.println("2");
-				rs = stmt.executeQuery(query);
-				System.out.println("3");
-				while (rs.next()) {
-					System.out.println(rs.getString("PASSWORD"));
-					if (pword.equals(rs.getString("PASSWORD"))) {
-						response.sendRedirect("home.html");
-					} else {
-						response.sendRedirect("login.jsp");
-					}
-				}
+				System.out.println(addItem);
+				stmt.executeQuery(addItem);
 			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println(
+						"<BR>An error has occurred during the Statement/ResultSet phase.  Please check the syntax and study the Exception details!");
+			}
+			try {
+				stmt = con.createStatement();
+				System.out.println(addSale);
+				stmt.executeQuery(addSale);
+			} catch (Exception e) {
+				System.out.println(e);
 				System.out.println(
 						"<BR>An error has occurred during the Statement/ResultSet phase.  Please check the syntax and study the Exception details!");
 			} finally {
@@ -92,8 +101,6 @@ public class LoginCheck extends HttpServlet {
 					System.out.println("<BR>An error occurred while closing down connection/statement");
 				}
 			}
-		} else if (request.getParameter("signup") != null) {
-			response.sendRedirect("signup.jsp");
 		} else {
 		}
 	}

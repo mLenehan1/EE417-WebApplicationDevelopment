@@ -13,8 +13,8 @@ import oracle.jdbc.driver.OracleDriver;
 /**
  * Servlet implementation class LoginCheck
  */
-@WebServlet("/LoginCheck")
-public class LoginCheck extends HttpServlet {
+@WebServlet("/PlaceBid")
+public class PlaceBid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/*
@@ -26,7 +26,7 @@ public class LoginCheck extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginCheck() {
+	public PlaceBid() {
 		super();
 	}
 
@@ -49,13 +49,12 @@ public class LoginCheck extends HttpServlet {
 		String JDBCUrl = "jdbc:oracle:thin:@ee417.c7clh2c6565n.eu-west-1.rds.amazonaws.com:1521:EE417";
 		String username = "ee_user";
 		String password = "ee_pass";
-		if (request.getParameter("login") != null) {
-			String uname = request.getParameter("username");
-			String pword = request.getParameter("password");
+		if (request.getParameter("createaccount") != null) {
+			String bid = request.getParameter("bid");
+			String saleid = request.getParameter("saleid");
 			System.out.println(username);
 			System.out.println(password);
-			String query = "SELECT PASSWORD FROM EE_USER.MLECE_USERS WHERE USERNAME='" + uname + "'";
-			System.out.println(query);
+			String setBid = "UPDATE MLECE_SALES SET CURRENTBID=" + bid + "WHERE SALEID=" + saleid;
 			try {
 				System.out.println("\nConnecting to the SSD Database......");
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -64,23 +63,15 @@ public class LoginCheck extends HttpServlet {
 				System.out.println(e);
 			}
 			try {
-				System.out.println("1");
 				stmt = con.createStatement();
-				System.out.println("2");
-				rs = stmt.executeQuery(query);
-				System.out.println("3");
-				while (rs.next()) {
-					System.out.println(rs.getString("PASSWORD"));
-					if (pword.equals(rs.getString("PASSWORD"))) {
-						response.sendRedirect("home.html");
-					} else {
-						response.sendRedirect("login.jsp");
-					}
-				}
+				System.out.println(setBid);
+				stmt.executeQuery(setBid);
 			} catch (Exception e) {
+				System.out.println(e);
 				System.out.println(
 						"<BR>An error has occurred during the Statement/ResultSet phase.  Please check the syntax and study the Exception details!");
-			} finally {
+			}
+			finally {
 				try {
 					if (rs != null)
 						rs.close();
@@ -92,8 +83,6 @@ public class LoginCheck extends HttpServlet {
 					System.out.println("<BR>An error occurred while closing down connection/statement");
 				}
 			}
-		} else if (request.getParameter("signup") != null) {
-			response.sendRedirect("signup.jsp");
 		} else {
 		}
 	}

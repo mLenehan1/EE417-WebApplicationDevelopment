@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="home.html" rel="html" type="text/html">
+<link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<p>Welcome, you are logged in
